@@ -94,12 +94,36 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-foreground mb-8 text-center sm:text-left">
-            <a href={`mailto:${personalInfo.email}`} className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors"><Mail className="w-4 h-4" /><span>{personalInfo.email}</span></a>
-            <a href={`tel:${personalInfo.phone}`} className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors"><Phone className="w-4 h-4" /><span>{personalInfo.phone}</span></a>
-            <div className="flex items-center justify-center sm:justify-start gap-2"><MapPin className="w-4 h-4" /><span>{personalInfo.location}</span></div>
-            {personalInfo.linkedin && <a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors"><LinkedinIcon className="w-4 h-4" /><span>{personalInfo.linkedin}</span></a>}
-            {personalInfo.github && <a href={`https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors"><GithubIcon className="w-4 h-4" /><span>{personalInfo.github}</span></a>}
-            {personalInfo.website && <a href={`https://${personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors"><Globe className="w-4 h-4" /><span>{personalInfo.website}</span></a>}
+            <a href={`mailto:${personalInfo.email}`} className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors">
+              <Mail className="w-4 h-4" />
+              <EditableField as="span" value={personalInfo.email} onSave={(value) => handleSave('personalInfo.email', value)} />
+            </a>
+            <a href={`tel:${personalInfo.phone}`} className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors">
+              <Phone className="w-4 h-4" />
+              <EditableField as="span" value={personalInfo.phone} onSave={(value) => handleSave('personalInfo.phone', value)} />
+            </a>
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <MapPin className="w-4 h-4" />
+              <EditableField as="span" value={personalInfo.location} onSave={(value) => handleSave('personalInfo.location', value)} />
+            </div>
+            {personalInfo.linkedin && (
+              <a href={`https://${personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors">
+                <LinkedinIcon className="w-4 h-4" />
+                <EditableField as="span" value={personalInfo.linkedin} onSave={(value) => handleSave('personalInfo.linkedin', value)} />
+              </a>
+            )}
+            {personalInfo.github && (
+              <a href={`https://${personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors">
+                <GithubIcon className="w-4 h-4" />
+                <EditableField as="span" value={personalInfo.github} onSave={(value) => handleSave('personalInfo.github', value)} />
+                </a>
+            )}
+            {personalInfo.website && (
+              <a href={`https://${personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start gap-2 hover:text-accent transition-colors">
+                <Globe className="w-4 h-4" />
+                <EditableField as="span" value={personalInfo.website} onSave={(value) => handleSave('personalInfo.website', value)} />
+              </a>
+            )}
         </div>
 
         <Separator className="my-8" />
@@ -137,7 +161,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                 ))}
               </ul>
             </div>
-          ))}\
+          ))}
         </Section>
         
         <Section icon={<GraduationCap className="w-6 h-6 text-accent" />} title="Education">
@@ -146,20 +170,20 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                <div>
                   <h3 className="text-lg font-semibold">{edu.degree}</h3>
                   <p className="font-medium text-foreground/80">{edu.institution}</p>
-                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}\
+                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
                   {(edu.startDate || edu.endDate) && <p>{edu.startDate}{edu.startDate && edu.endDate && ' - '}{edu.endDate}</p>}
                 </div>
             </div>
-          ))}\
+          ))}
         </Section>
 
         <Section icon={<Award className="w-6 h-6 text-accent" />} title="Skills">
             <div className="flex flex-wrap gap-2">
                 {skills.map(skill => (
                     <Badge key={skill.id} variant="secondary" className="text-base font-medium bg-accent/10 text-accent hover:bg-accent/20">{skill.name}</Badge>
-                ))}\
+                ))}
             </div>
         </Section>
         
@@ -171,10 +195,10 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                     <div className="flex flex-wrap gap-2 mt-2">
                         {proj.technologies.map(tech => (
                              <Badge key={tech} variant="outline" className="text-sm">{tech}</Badge>
-                        ))}\
+                        ))}
                     </div>
                 </div>
-            ))}\
+            ))}
         </Section>
       </CardContent>
     </Card>
