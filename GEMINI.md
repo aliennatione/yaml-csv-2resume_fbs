@@ -46,6 +46,10 @@ Questo file serve come contesto persistente per l'agente AI (Gemini) e come diar
 
 *Questa sezione verrà popolata cronologicamente con le modifiche apportate al progetto.*
 
+- **29/07/2024 (ba7a2f3)**:
+  - **ci**: Aggiunto workflow di GitHub Actions per il deploy su GitHub Pages al push di un tag.
+  - **docs**: Aggiornato il protocollo di interazione dell'agente.
+
 - **29/07/2024 (cf3df14)**:
   - **feat**: Aggiunta la possibilità di importare dati da file YAML e CSV.
   - **feat**: Creato il nuovo componente `FileImporter` per la gestione dell'upload dei file.
