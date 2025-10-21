@@ -94,6 +94,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                       value={personalInfo.title}
                       onSave={(value) => handleSave('personalInfo.title', value)}
                       className="text-xl text-accent mt-1"
+                      enableAI
                   />
               )}
             </div>
@@ -140,6 +141,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                   value={summary}
                   onSave={(value) => handleSave('summary', value)}
                   className="text-foreground/90 leading-relaxed"
+                  enableAI
               />
           </div>
 
@@ -151,7 +153,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
               <div key={exp.id} className="mb-6">
                 <div className="flex justify-between items-start">
                   <div>
-                    <EditableField as="h3" value={exp.title} onSave={(value) => handleSave(`experience.${expIndex}.title`, value)} className="text-lg font-semibold" />
+                    <EditableField as="h3" value={exp.title} onSave={(value) => handleSave(`experience.${expIndex}.title`, value)} className="text-lg font-semibold" enableAI />
                     <EditableField as="p" value={exp.company} onSave={(value) => handleSave(`experience.${expIndex}.company`, value)} className="font-medium text-foreground/80" />
                   </div>
                   <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
@@ -167,7 +169,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                 <ul className="list-disc pl-5 mt-2 space-y-2 text-foreground/90">
                   {exp.description.map((desc, descIndex) => (
                     <li key={descIndex} className="relative group/item">
-                      <EditableField as="textarea" value={desc} onSave={(value) => handleSave(`experience.${expIndex}.description.${descIndex}`, value)} className="w-full" />
+                      <EditableField as="textarea" value={desc} onSave={(value) => handleSave(`experience.${expIndex}.description.${descIndex}`, value)} className="w-full" enableAI />
                     </li>
                   ))}
                 </ul>
@@ -208,7 +210,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
               {projects.map((proj, projIndex) => (
                   <div key={proj.id} className="mb-4">
                       <EditableField as="a" value={proj.name} onSave={(value) => handleSave(`projects.${projIndex}.name`, value)} href={proj.url ? `https://${proj.url}` : '#'} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:text-accent transition-colors" />
-                      <EditableField as="textarea" value={proj.description} onSave={(value) => handleSave(`projects.${projIndex}.description`, value)} className="text-foreground/90 mt-1 w-full" />
+                      <EditableField as="textarea" value={proj.description} onSave={(value) => handleSave(`projects.${projIndex}.description`, value)} className="text-foreground/90 mt-1 w-full" enableAI />
                       <div className="flex flex-wrap gap-2 mt-2">
                           {proj.technologies.map((tech, techIndex) => (
                                <Badge key={tech} variant="outline" className="text-sm">

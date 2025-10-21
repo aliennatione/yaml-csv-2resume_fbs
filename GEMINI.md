@@ -46,6 +46,11 @@ Questo file serve come contesto persistente per l'agente AI (Gemini) e come diar
 
 *Questa sezione verrà popolata cronologicamente con le modifiche apportate al progetto.*
 
+- **29/07/2024 (cbe6941)**:
+  - **feat**: Aggiunta funzionalità di esportazione in PDF.
+  - **refactor**: Aggiornato `ResumePreview` per includere il pulsante di esportazione e la logica di stampa.
+  - **chore**: Aggiunta la dipendenza `react-to-print`.
+
 - **29/07/2024 (3c9550b)**:
   - **feat**: Aggiunta la possibilità di selezionare e applicare dinamicamente i temi al curriculum.
   - **feat**: Creato il nuovo componente `ThemeSelector` per la gestione della selezione del tema.
