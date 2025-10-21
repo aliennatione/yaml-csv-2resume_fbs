@@ -44,3 +44,34 @@ Questo file serve come contesto persistente per l'agente AI (Gemini) e come diar
 ## 6. Diario tecnico
 
 *Questa sezione verrà popolata cronologicamente con le modifiche apportate al progetto.*
+
+- **29/07/2024 (cf3df14)**:
+  - **feat**: Aggiunta la possibilità di importare dati da file YAML e CSV.
+  - **feat**: Creato il nuovo componente `FileImporter` per la gestione dell'upload dei file.
+  - **refactor**: Semplificata l'interfaccia utente rimuovendo la sidebar e il pannello di controllo.
+  - **refactor**: Aggiornata la pagina principale per integrare il nuovo componente `FileImporter`.
+  - **chore**: Aggiunte le dipendenze `js-yaml`, `papaparse`, `@types/js-yaml` e `@types/papaparse`.
+
+- **29/07/2024 (d6fb541)**:
+  - **feat**: Abilitata la modifica inline per le sezioni "Skills" e "Projects".
+  - **refactor**: Aggiornato il componente `ResumePreview` per rendere i campi delle sezioni "Skills" e "Projects" editabili.
+
+- **29/07/2024 (0670c2b)**:
+  - **feat**: Abilitata la modifica inline per la sezione "Education".
+  - **refactor**: Aggiornato il componente `ResumePreview` per rendere i campi della sezione "Education" editabili.
+  - **refactor**: Migliorata la funzione `handleSave` per gestire in modo più generico la modifica dei dati.
+
+- **29/07/2024 (777a895)**:
+  - **feat**: Abilitata la modifica inline per la sezione "Experience".
+  - **refactor**: Aggiornato il componente `ResumePreview` per rendere i campi della sezione "Experience" editabili.
+  - **refactor**: Migliorata la funzione `handleSave` per gestire la modifica di dati nidificati (oggetti e array).
+
+- **29/07/2024 (6585556)**:
+  - **feat**: Abilitata la modifica inline per le informazioni di contatto.
+  - **refactor**: Aggiornato il componente `ResumePreview` per rendere i campi di contatto editabili.
+
+- **29/07/2024 (94a4e0d)**:
+  - **feat**: Aggiunta la possibilità di modificare inline alcuni campi del curriculum.
+  - **feat**: Creato il nuovo componente `EditableField` per la gestione della modifica dei campi.
+  - **refactor**: Aggiornato il componente `ResumePreview` per integrare il nuovo componente `EditableField`.
+  - **chore**: Eseguito il commit e il push delle modifiche.

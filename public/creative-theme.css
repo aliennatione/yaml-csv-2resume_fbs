@@ -1,0 +1,22 @@
+
+/* Creative Theme */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f2f5;
+    color: #444;
+}
+
+.resume {
+    background: #fff;
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+    color: #e74c3c;
+    font-weight: 700;
+    text-transform: uppercase;
+}
