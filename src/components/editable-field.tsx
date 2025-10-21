@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
-import { Button } from './ui/button';
 
 type EditableFieldProps = {
   as?: React.ElementType;
@@ -11,7 +9,7 @@ type EditableFieldProps = {
   className?: string;
   children?: React.ReactNode;
   enableAI?: boolean;
-};
+} & Omit<React.HTMLAttributes<HTMLElement>, 'onSave' | 'className'>;
 
 export const EditableField: React.FC<EditableFieldProps> = ({
   as: Component = 'span',
@@ -23,7 +21,6 @@ export const EditableField: React.FC<EditableFieldProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(value);
-  const [isImproving, setIsImproving] = useState(false);
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -53,29 +50,6 @@ export const EditableField: React.FC<EditableFieldProps> = ({
     }
   };
 
-  const handleImproveText = async () => {
-    setIsImproving(true);
-    try {
-      const response = await fetch('/api/genkit/improveText', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ data: text }),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to improve text');
-      }
-      const improvedText = await response.json();
-      setText(improvedText);
-      onSave(improvedText);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsImproving(false);
-    }
-  };
-
   useEffect(() => {
     if (isEditing && inputRef.current) {
       inputRef.current.focus();
@@ -102,21 +76,10 @@ export const EditableField: React.FC<EditableFieldProps> = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
-                className={`${className} w-full pr-10`}
+                className={`${className} w-full`}
                 rows={Component === 'textarea' ? 4 : undefined}
                 {...props}
             />
-            {enableAI && (
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2"
-                    onClick={handleImproveText}
-                    disabled={isImproving}
-                >
-                    <Sparkles className={`w-4 h-4 ${isImproving ? 'animate-spin' : ''}`} />
-                </Button>
-            )}
         </div>
     );
   }
@@ -124,19 +87,6 @@ export const EditableField: React.FC<EditableFieldProps> = ({
   return (
     <div className="relative group w-full">
         {renderComponent()}
-        <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            {enableAI && (
-                 <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleImproveText}
-                    disabled={isImproving}
-                    className="p-1 h-auto"
-                >
-                    <Sparkles className={`w-4 h-4 ${isImproving ? 'animate-spin' : ''}`} />
-                </Button>
-            )}
-        </div>
     </div>
   )
 

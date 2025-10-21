@@ -57,7 +57,7 @@ export interface ResumeData {
   projects: Project[];
 }
 
-export const defaultResumeData: ResumeData = {
+export const initialData: ResumeData = {
   personalInfo: {
     name: "Alex Doe",
     title: "Senior Software Engineer",

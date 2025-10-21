@@ -3,13 +3,13 @@
 import * as React from "react";
 import { ResumePreview } from "@/components/resume-preview";
 import type { ResumeData } from "@/lib/resume-data";
-import { defaultResumeData } from "@/lib/resume-data";
+import { initialData } from "@/lib/resume-data";
 import { FileImporter } from "@/components/file-importer";
 import { ThemeSelector } from "@/components/theme-selector";
 import { THEMES, type Theme } from "@/lib/themes";
 
 export default function ResumeArchitectPage() {
-  const [resumeData, setResumeData] = React.useState<ResumeData>(defaultResumeData);
+  const [resumeData, setResumeData] = React.useState<ResumeData>(initialData);
   const [selectedTheme, setSelectedTheme] = React.useState<Theme>(THEMES[0]);
 
   const handleDataImport = (data: ResumeData) => {

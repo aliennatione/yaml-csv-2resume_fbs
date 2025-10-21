@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useReactToPrint } from "react-to-print";
+// import { useReactToPrint } from "react-to-print";
 import type { ResumeData } from "@/lib/resume-data";
 import Image from "next/image";
 import {
@@ -47,9 +47,10 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
   const { personalInfo, summary, experience, education, skills, projects } = data;
   const resumeRef = React.useRef<HTMLDivElement>(null);
 
-  const handlePrint = useReactToPrint({
-    content: () => resumeRef.current,
-  });
+  // const handlePrint = useReactToPrint({
+  //   body: () => resumeRef.current,
+  //   documentTitle: `${personalInfo.name} - Resume`,
+  // });
 
   const handleSave = (field: string, value: any) => {
     const keys = field.split('.');
@@ -68,7 +69,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
   return (
     <div>
       <div className="flex justify-end mb-4">
-        <Button onClick={handlePrint}>Export to PDF</Button>
+        {/* <Button onClick={handlePrint}>Export to PDF</Button> */}
       </div>
       <Card ref={resumeRef} id="resume-container" className="max-w-4xl mx-auto shadow-lg">
         <CardContent className="p-8 sm:p-12">
@@ -159,9 +160,9 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                   <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
                     {(exp.startDate || exp.endDate) && 
                       <p>
-                          <EditableField as="span" value={exp.startDate} onSave={(value) => handleSave(`experience.${expIndex}.startDate`, value)} />
+                          <EditableField as="span" value={exp.startDate || ''} onSave={(value) => handleSave(`experience.${expIndex}.startDate`, value)} />
                           {exp.startDate && exp.endDate && ' - '}
-                          <EditableField as="span" value={exp.endDate} onSave={(value) => handleSave(`experience.${expIndex}.endDate`, value)} />
+                          <EditableField as="span" value={exp.endDate || ''} onSave={(value) => handleSave(`experience.${expIndex}.endDate`, value)} />
                       </p>}
                     {exp.location && <EditableField as="p" value={exp.location} onSave={(value) => handleSave(`experience.${expIndex}.location`, value)} />}
                   </div>
@@ -187,9 +188,9 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                   </div>
                   <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
                     {(edu.startDate || edu.endDate) && <p>
-                        <EditableField as="span" value={edu.startDate} onSave={(value) => handleSave(`education.${eduIndex}.startDate`, value)} />
+                        <EditableField as="span" value={edu.startDate || ''} onSave={(value) => handleSave(`education.${eduIndex}.startDate`, value)} />
                         {edu.startDate && edu.endDate && ' - '}
-                        <EditableField as="span" value={edu.endDate} onSave={(value) => handleSave(`education.${eduIndex}.endDate`, value)} />
+                        <EditableField as="span" value={edu.endDate || ''} onSave={(value) => handleSave(`education.${eduIndex}.endDate`, value)} />
                     </p>}
                   </div>
               </div>
@@ -209,7 +210,9 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
           <Section icon={<Lightbulb className="w-6 h-6 text-accent" />} title="Projects">
               {projects.map((proj, projIndex) => (
                   <div key={proj.id} className="mb-4">
-                      <EditableField as="a" value={proj.name} onSave={(value) => handleSave(`projects.${projIndex}.name`, value)} href={proj.url ? `https://${proj.url}` : '#'} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:text-accent transition-colors" />
+                      <a href={proj.url ? `https://${proj.url}` : '#'} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:text-accent transition-colors">
+                        <EditableField as="span" value={proj.name} onSave={(value) => handleSave(`projects.${projIndex}.name`, value)} />
+                      </a>
                       <EditableField as="textarea" value={proj.description} onSave={(value) => handleSave(`projects.${projIndex}.description`, value)} className="text-foreground/90 mt-1 w-full" enableAI />
                       <div className="flex flex-wrap gap-2 mt-2">
                           {proj.technologies.map((tech, techIndex) => (
