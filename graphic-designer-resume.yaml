@@ -1,0 +1,39 @@
+personalInfo:
+  name: "Marco Verdi"
+  title: "Graphic Designer"
+  email: "marco.verdi@email.com"
+  phone: "+39 333 555 4444"
+  location: "Firenze, Italia"
+  linkedin: "linkedin.com/in/marcoverdi"
+  portfolio: "marcoverdi.design"
+
+summary: "Graphic designer creativo con una forte passione per il branding e la comunicazione visiva. Esperienza nella creazione di loghi, materiali di marketing e interfacce utente, con un occhio di riguardo per i dettagli e l'estetica."
+
+experience:
+  - id: "exp1"
+    title: "Senior Graphic Designer"
+    company: "Creative Agency"
+    location: "Firenze, Italia"
+    startDate: "Set 2019"
+    endDate: "Presente"
+    description:
+      - "Realizzazione di campagne di branding complete per clienti di diversi settori."
+      - "Creazione di interfacce utente per applicazioni mobili e siti web."
+
+education:
+  - id: "edu1"
+    institution: "Accademia di Belle Arti di Firenze"
+    degree: "Diploma in Graphic Design"
+    startDate: "2016"
+    endDate: "2019"
+
+skills:
+  - id: "skill1"
+    name: "Adobe Creative Suite (Photoshop, Illustrator, InDesign)"
+    level: "Expert"
+  - id: "skill2"
+    name: "Figma"
+    level: "Advanced"
+  - id: "skill3"
+    name: "Branding"
+    level: "Expert"

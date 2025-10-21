@@ -1,0 +1,39 @@
+personalInfo:
+  name: "Laura Bianchi"
+  title: "Data Scientist"
+  email: "laura.bianchi@email.com"
+  phone: "+39 333 987 6543"
+  location: "Torino, Italia"
+  linkedin: "linkedin.com/in/laurabianchi"
+  github: "github.com/laurabianchi"
+
+summary: "Data Scientist con esperienza nell'analisi di dati complessi e nello sviluppo di modelli di machine learning per risolvere problemi di business. Competente in Python, R, e SQL, con una solida conoscenza di statistica e algoritmi."
+
+experience:
+  - id: "exp1"
+    title: "Senior Data Scientist"
+    company: "BigData Corp"
+    location: "Torino, Italia"
+    startDate: "Giu 2020"
+    endDate: "Presente"
+    description:
+      - "Sviluppo modelli predittivi per l'analisi del churn dei clienti, con un miglioramento del 15% nella retention."
+      - "Analisi esplorativa dei dati per identificare nuove opportunità di business."
+
+education:
+  - id: "edu1"
+    institution: "Politecnico di Torino"
+    degree: "Master in Data Science"
+    startDate: "2018"
+    endDate: "2020"
+
+skills:
+  - id: "skill1"
+    name: "Python (Pandas, Scikit-learn)"
+    level: "Expert"
+  - id: "skill2"
+    name: "R"
+    level: "Advanced"
+  - id: "skill3"
+    name: "SQL"
+    level: "Advanced"
