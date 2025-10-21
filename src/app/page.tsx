@@ -13,8 +13,6 @@ import type { ResumeData } from "@/lib/resume-data";
 import { defaultResumeData } from "@/lib/resume-data";
 import { useToast } from "@/hooks/use-toast";
 import yaml from "js-yaml";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 export default function ResumeArchitectPage() {
   const [resumeData, setResumeData] = React.useState<ResumeData>(defaultResumeData);
@@ -64,9 +62,12 @@ export default function ResumeArchitectPage() {
     reader.readAsText(file);
   };
 
-  const handlePdfExport = () => {
+  const handlePdfExport = async () => {
     const input = document.getElementById("resume-container");
     if (!input) return;
+
+    const { default: jsPDF } = await import("jspdf");
+    const { default: html2canvas } = await import("html2canvas");
 
     // A4 dimensions in points: 595.28 x 841.89
     const a4Width = 595.28;
