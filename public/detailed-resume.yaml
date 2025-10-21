@@ -1,0 +1,49 @@
+personal_info:
+  name: Mario Rossi
+  title: Sviluppatore Software
+  email: mario.rossi@example.com
+  phone: +39 123 4567890
+  linkedin: linkedin.com/in/mariorossi
+  github: github.com/mariorossi
+
+summary: Sviluppatore software con 5 anni di esperienza nello sviluppo di applicazioni web. Appassionato di tecnologie open source e di metodologie agili.
+
+experience:
+  - company: Tech Solutions Inc.
+    location: Milano, Italia
+    title: Sviluppatore Software Senior
+    period: 2020 - Presente
+    description: >
+      Sviluppo e manutenzione di applicazioni web per clienti internazionali.
+      Utilizzo di React, Node.js, e metodologie agili.
+
+  - company: Web Agency Srl
+    location: Roma, Italia
+    title: Sviluppatore Web
+    period: 2018 - 2020
+    description: >
+      Realizzazione di siti web e applicazioni per piccole e medie imprese.
+
+education:
+  - university: Politecnico di Milano
+    degree: Laurea Magistrale in Ingegneria Informatica
+    period: 2015 - 2018
+    description: >
+      Specializzazione in ingegneria del software.
+
+skills:
+  - name: JavaScript
+    level: Esperto
+  - name: React
+    level: Esperto
+  - name: Node.js
+    level: Intermedio
+  - name: Python
+    level: Intermedio
+  - name: Inglese
+    level: Fluente
+
+projects:
+  - name: Applicazione di E-commerce
+    description: Sviluppo di un'applicazione di e-commerce completa con React e Node.js.
+    link: github.com/mariorossi/ecommerce-app

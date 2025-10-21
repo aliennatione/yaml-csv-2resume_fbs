@@ -1,0 +1,72 @@
+informazioni_personali:
+  nome: Chiara Rossi
+  indirizzo: Viale Italia, 10, 00100 Roma (RM)
+  telefono: +39 347 123 4567
+  email: chiara.rossi.dummy@example.com
+  sesso: Femminile
+  data_di_nascita: 15 Settembre 1990
+  nazionalita: Italiana
+  autorizzazione_trattamento_dati: É autorizzato il trattamento dei dati presenti ai sensi dell' art. 13 del D. Lgs. 196/2003 e del GDPR (Regolamento UE 2016/679).
+
+esperienza_professionale:
+  - ruolo: Sviluppatore Frontend Junior
+    dettagli: Sviluppo e manutenzione di interfacce utente web utilizzando React e JavaScript.
+    datore_di_lavoro: TechSolutions S.p.A.
+    periodo: da Gennaio 2022 alla data attuale
+  - ruolo: Designer Grafico e Web
+    dettagli: Creazione di materiali promozionali (brochure, loghi) e gestione del sito web aziendale.
+    datore_di_lavoro: Creative Minds Studio
+    periodo: da Luglio 2018 a Dicembre 2021
+  - ruolo: Addetto al Customer Service
+    dettagli: Gestione delle richieste dei clienti tramite telefono ed email, risoluzione di problematiche.
+    datore_di_lavoro: Global Support S.r.l.
+    periodo: da Marzo 2016 a Giugno 2018
+  - ruolo: Stagista Ufficio Marketing
+    dettagli: Supporto nella creazione di campagne social media e analisi dei dati di mercato.
+    datore_di_lavoro: Marketing Pro
+    periodo: da Ottobre 2015 a Febbraio 2016
+
+istruzione_e_formazione:
+  - titolo: Laurea Magistrale in Informatica
+    istituto: Università degli Studi di Roma "La Sapienza"
+    dettagli: Specializzazione in Ingegneria del Software. Tesi su 'Sistemi Distribuiti'.
+    voto: 110/110 con Lode
+    periodo: da Settembre 2013 a Luglio 2015
+  - titolo: Laurea Triennale in Comunicazione Digitale
+    istituto: Università degli Studi di Milano
+    voto: 105/110
+    periodo: da Settembre 2010 a Settembre 2013
+  - titolo: Corso intensivo su Framework React
+    istituto: Coding Academy
+    dettagli: 120 ore di formazione pratica su React Hooks e Redux.
+    periodo: Gennaio 2021
+  - titolo: Diploma di maturità scientifica
+    istituto: Liceo Scientifico Statale "G. Marconi", Roma
+    voto: 92/100
+    periodo: Non specificato
+
+competenze_personali:
+  lingue_straniere:
+    inglese:
+      comprensione:
+        ascolto: C1
+        lettura: C1
+      parlato:
+        interazione: B2
+        produzione_orale: B2
+      produzione_scritta: C1
+    spagnolo:
+      comprensione:
+        ascolto: A2
+        lettura: B1
+      parlato:
+        interazione: A1
+        produzione_orale: A1
+      produzione_scritta: A2
+  competenze_informatiche:
+    elaborazione_informazioni: Utente avanzato
+    comunicazione: Utente autonomo
+    creazione_di_contenuti: Utente avanzato
+    sicurezza: Utente autonomo
+    risoluzione_di_problemi: Utente autonomo
+  patente_di_guida: B

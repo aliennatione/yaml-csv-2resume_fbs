@@ -60,6 +60,93 @@ export default function ResumeArchitectPage() {
   const [customCss, setCustomCss] = React.useState<string>("");
   const { toast } = useToast();
 
+  const loadYamlFile = async (filePath: string) => {
+    try {
+      const response = await fetch(filePath);
+      const text = await response.text();
+      const data = yaml.load(text) as any;
+      let mappedData: ResumeData;
+
+      if (data.informazioni_personali) {
+        mappedData = mapNewYamlToResumeData(data);
+      } else {
+        mappedData = data as ResumeData;
+      }
+
+      if (mappedData && mappedData.personalInfo && mappedData.experience) {
+        setResumeData(mappedData);
+        toast({
+          title: "Success",
+          description: `Loaded ${filePath} successfully.`,
+        });
+      } else {
+        throw new Error("Invalid YAML structure.");
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: `Failed to load ${filePath}. Please check its format.`,
+      });
+    }
+  };
+
+  const loadCssFile = async (filePath: string) => {
+    try {
+      const response = await fetch(filePath);
+      const css = await response.text();
+      setCustomCss(css);
+      const styleTag = document.getElementById("custom-styles");
+      if (styleTag) {
+        styleTag.innerHTML = css;
+      }
+      toast({
+        title: "Success",
+        description: `Loaded ${filePath} successfully.`,
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: `Failed to load ${filePath}.`,
+      });
+    }
+  };
+
+  const handlePresetChange = (preset: string) => {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    let filePath = "";
+    switch (preset) {
+      case "detailed":
+        filePath = `${basePath}/detailed-resume.yaml`;
+        break;
+      case "new-format":
+        filePath = `${basePath}/new-format-resume.yaml`;
+        break;
+      default:
+        filePath = `${basePath}/example-resume.yaml`;
+        break;
+    }
+    loadYamlFile(filePath);
+  };
+
+  const handleStyleChange = (style: string) => {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    let filePath = "";
+    switch (style) {
+      case "dark":
+        filePath = `${basePath}/dark-theme.css`;
+        break;
+      case "classic":
+        filePath = `${basePath}/classic-theme.css`;
+        break;
+      default:
+        filePath = `${basePath}/example-style.css`;
+        break;
+    }
+    loadCssFile(filePath);
+  };
+
   const handleYamlUpload = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -67,14 +154,12 @@ export default function ResumeArchitectPage() {
         const data = yaml.load(e.target?.result as string) as any;
         let mappedData: ResumeData;
 
-        // Rilevamento del formato e mappatura
         if (data.informazioni_personali) {
           mappedData = mapNewYamlToResumeData(data);
         } else {
           mappedData = data as ResumeData;
         }
 
-        // Validazione di base
         if (mappedData && mappedData.personalInfo && mappedData.experience) {
           setResumeData(mappedData);
           toast({
@@ -191,6 +276,8 @@ export default function ResumeArchitectPage() {
           onCssUpload={handleCssUpload}
           onPdfExport={handlePdfExport}
           onHtmlExport={handleHtmlExport}
+          onPresetChange={handlePresetChange}
+          onStyleChange={handleStyleChange}
         />
       </Sidebar>
       <SidebarInset>

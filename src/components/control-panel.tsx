@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -11,6 +12,13 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Upload,
   FileText,
@@ -29,6 +37,8 @@ type ControlPanelProps = {
   onCssUpload: (file: File) => void;
   onPdfExport: () => void;
   onHtmlExport: () => void;
+  onPresetChange: (preset: string) => void;
+  onStyleChange: (style: string) => void;
 };
 
 export function ControlPanel({
@@ -36,6 +46,8 @@ export function ControlPanel({
   onCssUpload,
   onPdfExport,
   onHtmlExport,
+  onPresetChange,
+  onStyleChange,
 }: ControlPanelProps) {
   const yamlInputRef = React.useRef<HTMLInputElement>(null);
   const cssInputRef = React.useRef<HTMLInputElement>(null);
@@ -62,6 +74,34 @@ export function ControlPanel({
           <h2 className="text-lg font-semibold font-headline">Controlli</h2>
         </SidebarHeader>
         <div className="flex-1 overflow-y-auto">
+          <SidebarGroup>
+            <SidebarGroupLabel>Preset YAML</SidebarGroupLabel>
+            <Select onValueChange={onPresetChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Seleziona un preset" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default</SelectItem>
+                <SelectItem value="detailed">Dettagliato</SelectItem>
+                <SelectItem value="new-format">Nuovo Formato</SelectItem>
+              </SelectContent>
+            </Select>
+          </SidebarGroup>
+
+          <SidebarGroup>
+            <SidebarGroupLabel>Stili CSS</SidebarGroupLabel>
+            <Select onValueChange={onStyleChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Seleziona uno stile" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="default">Default</SelectItem>
+                <SelectItem value="dark">Scuro</SelectItem>
+                <SelectItem value="classic">Classico</SelectItem>
+              </SelectContent>
+            </Select>
+          </SidebarGroup>
+
           <SidebarGroup>
             <SidebarGroupLabel>Import Dati</SidebarGroupLabel>
             <SidebarMenu>
