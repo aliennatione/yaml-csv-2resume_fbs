@@ -185,20 +185,24 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
 
         <Section icon={<Award className="w-6 h-6 text-accent" />} title="Skills">
             <div className="flex flex-wrap gap-2">
-                {skills.map(skill => (
-                    <Badge key={skill.id} variant="secondary" className="text-base font-medium bg-accent/10 text-accent hover:bg-accent/20">{skill.name}</Badge>
+                {skills.map((skill, skillIndex) => (
+                    <Badge key={skill.id} variant="secondary" className="text-base font-medium bg-accent/10 text-accent hover:bg-accent/20">
+                        <EditableField as="span" value={skill.name} onSave={(value) => handleSave(`skills.${skillIndex}.name`, value)} />
+                    </Badge>
                 ))}
             </div>
         </Section>
         
         <Section icon={<Lightbulb className="w-6 h-6 text-accent" />} title="Projects">
-            {projects.map(proj => (
+            {projects.map((proj, projIndex) => (
                 <div key={proj.id} className="mb-4">
-                    <a href={proj.url ? `https://${proj.url}` : '#'} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:text-accent transition-colors">{proj.name}</a>
-                    <p className="text-foreground/90 mt-1">{proj.description}</p>
+                    <EditableField as="a" value={proj.name} onSave={(value) => handleSave(`projects.${projIndex}.name`, value)} href={proj.url ? `https://${proj.url}` : '#'} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold hover:text-accent transition-colors" />
+                    <EditableField as="textarea" value={proj.description} onSave={(value) => handleSave(`projects.${projIndex}.description`, value)} className="text-foreground/90 mt-1 w-full" />
                     <div className="flex flex-wrap gap-2 mt-2">
-                        {proj.technologies.map(tech => (
-                             <Badge key={tech} variant="outline" className="text-sm">{tech}</Badge>
+                        {proj.technologies.map((tech, techIndex) => (
+                             <Badge key={tech} variant="outline" className="text-sm">
+                                <EditableField as="span" value={tech} onSave={(value) => handleSave(`projects.${projIndex}.technologies.${techIndex}`, value)} />
+                             </Badge>
                         ))}
                     </div>
                 </div>
