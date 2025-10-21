@@ -139,7 +139,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                         ))}
                     </div>
                 </div>
-            )) Trivet snippet
+            ))}
         </Section>
       </CardContent>
     </Card>
