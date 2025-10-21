@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/sidebar";
 import { ControlPanel } from "@/components/control-panel";
 import { ResumePreview } from "@/components/resume-preview";
-import { AIEnhancer } from "@/components/ai-enhancer";
 import type { ResumeData } from "@/lib/resume-data";
 import { defaultResumeData } from "@/lib/resume-data";
 import { useToast } from "@/hooks/use-toast";
@@ -17,15 +16,9 @@ import yaml from "js-yaml";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-type EnhancerState = {
-  entry: string;
-  onSave: (newEntry: string) => void;
-} | null;
-
 export default function ResumeArchitectPage() {
   const [resumeData, setResumeData] = React.useState<ResumeData>(defaultResumeData);
   const [customCss, setCustomCss] = React.useState<string>("");
-  const [enhancerState, setEnhancerState] = React.useState<EnhancerState>(null);
   const { toast } = useToast();
 
   const handleYamlUpload = (file: File) => {
@@ -139,21 +132,6 @@ export default function ResumeArchitectPage() {
     link.click();
     document.body.removeChild(link);
   };
-  
-  const handleEnhanceRequest = (entry: string, onSave: (newEntry: string) => void) => {
-    setEnhancerState({ entry, onSave });
-  };
-
-  const handleSaveEnhancedEntry = (newEntry: string) => {
-    if (enhancerState) {
-      enhancerState.onSave(newEntry);
-      setEnhancerState(null);
-      toast({
-        title: "Success",
-        description: "Entry updated with AI suggestions.",
-      });
-    }
-  };
 
   return (
     <SidebarProvider>
@@ -173,19 +151,12 @@ export default function ResumeArchitectPage() {
           </div>
         </header>
         <main className="p-4 sm:p-8">
-          <ResumePreview 
+          <ResumePreview
             data={resumeData}
             setData={setResumeData}
-            onEnhanceRequest={handleEnhanceRequest}
           />
         </main>
       </SidebarInset>
-      <AIEnhancer
-        open={!!enhancerState}
-        onOpenChange={(open) => !open && setEnhancerState(null)}
-        entry={enhancerState?.entry ?? ""}
-        onSave={handleSaveEnhancedEntry}
-      />
     </SidebarProvider>
   );
 }
