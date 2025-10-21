@@ -44,13 +44,14 @@ const Section: React.FC<{
 export function ResumePreview({ data, setData }: ResumePreviewProps) {
   const { personalInfo, summary, experience, education, skills, projects } = data;
 
-  const handleSave = (field: keyof ResumeData | `personalInfo.${keyof ResumeData['personalInfo']}` | `experience.${number}.${keyof ResumeData['experience'][0]}` | `experience.${number}.description.${number}`, value: any) => {
+  const handleSave = (field: string, value: any) => {
     const keys = field.split('.');
     setData(prevData => {
         const newData = JSON.parse(JSON.stringify(prevData));
-        let current = newData;
+        let current: any = newData;
         for (let i = 0; i < keys.length - 1; i++) {
-            current = current[keys[i]];
+            const key = keys[i];
+            current = current[key];
         }
         current[keys[keys.length - 1]] = value;
         return newData;
@@ -164,15 +165,19 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
         </Section>
         
         <Section icon={<GraduationCap className="w-6 h-6 text-accent" />} title="Education">
-          {education.map((edu) => (
+          {education.map((edu, eduIndex) => (
             <div key={edu.id} className="mb-4 flex justify-between items-start">
                <div>
-                  <h3 className="text-lg font-semibold">{edu.degree}</h3>
-                  <p className="font-medium text-foreground/80">{edu.institution}</p>
-                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}
+                  <EditableField as="h3" value={edu.degree} onSave={(value) => handleSave(`education.${eduIndex}.degree`, value)} className="text-lg font-semibold" />
+                  <EditableField as="p" value={edu.institution} onSave={(value) => handleSave(`education.${eduIndex}.institution`, value)} className="font-medium text-foreground/80" />
+                  {edu.field && <EditableField as="p" value={edu.field} onSave={(value) => handleSave(`education.${eduIndex}.field`, value)} className="text-sm text-muted-foreground" />}
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
-                  {(edu.startDate || edu.endDate) && <p>{edu.startDate}{edu.startDate && edu.endDate && ' - '}{edu.endDate}</p>}
+                  {(edu.startDate || edu.endDate) && <p>
+                      <EditableField as="span" value={edu.startDate} onSave={(value) => handleSave(`education.${eduIndex}.startDate`, value)} />
+                      {edu.startDate && edu.endDate && ' - '}
+                      <EditableField as="span" value={edu.endDate} onSave={(value) => handleSave(`education.${eduIndex}.endDate`, value)} />
+                  </p>}
                 </div>
             </div>
           ))}
