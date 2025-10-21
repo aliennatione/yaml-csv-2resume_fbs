@@ -18,6 +18,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { EditableField } from "./editable-field";
 
 type ResumePreviewProps = {
   data: ResumeData;
@@ -43,6 +44,25 @@ const Section: React.FC<{
 export function ResumePreview({ data, setData }: ResumePreviewProps) {
   const { personalInfo, summary, experience, education, skills, projects } = data;
 
+  const handleSave = (field: keyof ResumeData | `personalInfo.${keyof ResumeData['personalInfo']}`, value: any) => {
+    const keys = field.split('.');
+    if (keys.length > 1) {
+        const [mainKey, subKey] = keys;
+        setData(prevData => ({
+            ...prevData,
+            [mainKey]: {
+                ...(prevData as any)[mainKey],
+                [subKey]: value
+            }
+        }));
+    } else {
+        setData(prevData => ({
+            ...prevData,
+            [field]: value,
+        }));
+    }
+  };
+
   return (
     <Card id="resume-container" className="max-w-4xl mx-auto shadow-lg">
       <CardContent className="p-8 sm:p-12">
@@ -56,10 +76,20 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
             data-ai-hint={personalInfo.profilePictureHint}
           />
           <div className="text-center sm:text-left">
-            <h1 className="text-4xl sm:text-5xl font-bold font-headline text-primary">
-              {personalInfo.name}
-            </h1>
-            {personalInfo.title && <p className="text-xl text-accent mt-1">{personalInfo.title}</p>}
+            <EditableField
+              as="h1"
+              value={personalInfo.name}
+              onSave={(value) => handleSave('personalInfo.name', value)}
+              className="text-4xl sm:text-5xl font-bold font-headline text-primary"
+            />
+            {personalInfo.title && (
+                <EditableField
+                    as="p"
+                    value={personalInfo.title}
+                    onSave={(value) => handleSave('personalInfo.title', value)}
+                    className="text-xl text-accent mt-1"
+                />
+            )}
           </div>
         </header>
 
@@ -75,7 +105,12 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
         <Separator className="my-8" />
         
         <div className="relative group">
-            <p className="text-foreground/90 leading-relaxed">{summary}</p>
+            <EditableField
+                as="textarea"
+                value={summary}
+                onSave={(value) => handleSave('summary', value)}
+                className="text-foreground/90 leading-relaxed"
+            />
         </div>
 
 
@@ -102,7 +137,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                 ))}
               </ul>
             </div>
-          ))}
+          ))}\
         </Section>
         
         <Section icon={<GraduationCap className="w-6 h-6 text-accent" />} title="Education">
@@ -111,20 +146,20 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                <div>
                   <h3 className="text-lg font-semibold">{edu.degree}</h3>
                   <p className="font-medium text-foreground/80">{edu.institution}</p>
-                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}
+                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}\
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
                   {(edu.startDate || edu.endDate) && <p>{edu.startDate}{edu.startDate && edu.endDate && ' - '}{edu.endDate}</p>}
                 </div>
             </div>
-          ))}
+          ))}\
         </Section>
 
         <Section icon={<Award className="w-6 h-6 text-accent" />} title="Skills">
             <div className="flex flex-wrap gap-2">
                 {skills.map(skill => (
                     <Badge key={skill.id} variant="secondary" className="text-base font-medium bg-accent/10 text-accent hover:bg-accent/20">{skill.name}</Badge>
-                ))}
+                ))}\
             </div>
         </Section>
         
@@ -136,10 +171,10 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                     <div className="flex flex-wrap gap-2 mt-2">
                         {proj.technologies.map(tech => (
                              <Badge key={tech} variant="outline" className="text-sm">{tech}</Badge>
-                        ))}
+                        ))}\
                     </div>
                 </div>
-            ))}
+            ))}\
         </Section>
       </CardContent>
     </Card>
