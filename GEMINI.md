@@ -38,6 +38,7 @@ Questo file serve come contesto persistente per l'agente AI (Gemini) e come diar
 -   **Conferme**: Chiedi conferma solo se l'intento non è chiaro o se le modifiche richieste sono particolarmente invasive.
 -   **Commit**: Ogni modifica deve essere eseguita in un commit atomico e chiaro.
 -   **Aggiornamenti**: Dopo ogni intervento, aggiorna il `## Diario tecnico` con la data e il riferimento al commit.
+-   **Efficienza**: Concatena i comandi (es. `git add . && git commit -m "messaggio" && git push`) per ridurre il numero di richieste di autorizzazione.
 
 ---
 
