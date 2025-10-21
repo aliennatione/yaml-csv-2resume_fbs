@@ -22,7 +22,6 @@ import { Button } from "@/components/ui/button";
 type ResumePreviewProps = {
   data: ResumeData;
   setData: React.Dispatch<React.SetStateAction<ResumeData>>;
-  onEnhanceRequest: (entry: string, onSave: (newEntry: string) => void) => void;
 };
 
 const Section: React.FC<{
@@ -41,26 +40,9 @@ const Section: React.FC<{
   </section>
 );
 
-export function ResumePreview({ data, setData, onEnhanceRequest }: ResumePreviewProps) {
+export function ResumePreview({ data, setData }: ResumePreviewProps) {
   const { personalInfo, summary, experience, education, skills, projects } = data;
 
-  const handleDescriptionEnhance = (expIndex: number, descIndex: number) => {
-    const entry = experience[expIndex].description[descIndex];
-    const onSave = (newEntry: string) => {
-      const newData = { ...data };
-      newData.experience[expIndex].description[descIndex] = newEntry;
-      setData(newData);
-    };
-    onEnhanceRequest(entry, onSave);
-  };
-
-  const handleSummaryEnhance = () => {
-    const onSave = (newEntry: string) => {
-      setData({ ...data, summary: newEntry });
-    };
-    onEnhanceRequest(summary, onSave);
-  };
-  
   return (
     <Card id="resume-container" className="max-w-4xl mx-auto shadow-lg">
       <CardContent className="p-8 sm:p-12">
@@ -94,7 +76,6 @@ export function ResumePreview({ data, setData, onEnhanceRequest }: ResumePreview
         
         <div className="relative group">
             <p className="text-foreground/90 leading-relaxed">{summary}</p>
-            <Button variant="ghost" size="icon" className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity" onClick={handleSummaryEnhance}><Sparkles className="w-4 h-4 text-accent"/></Button>
         </div>
 
 
@@ -117,7 +98,6 @@ export function ResumePreview({ data, setData, onEnhanceRequest }: ResumePreview
                 {exp.description.map((desc, descIndex) => (
                   <li key={descIndex} className="relative group/item">
                     {desc}
-                    <Button variant="ghost" size="icon" className="absolute -top-1 -right-8 opacity-0 group-hover/item:opacity-100 transition-opacity" onClick={() => handleDescriptionEnhance(expIndex, descIndex)}><Sparkles className="w-4 h-4 text-accent"/></Button>
                   </li>
                 ))}
               </ul>
