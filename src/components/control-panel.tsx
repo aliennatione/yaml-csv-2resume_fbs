@@ -52,6 +52,8 @@ export function ControlPanel({
     }
     event.target.value = ""; // Reset input
   };
+  
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <>
@@ -124,7 +126,7 @@ export function ControlPanel({
                     asChild
                     tooltip="Scarica YAML di esempio"
                   >
-                    <a href="/example-resume.yaml" download="example-resume.yaml">
+                    <a href={`${basePath}/example-resume.yaml`} download="example-resume.yaml">
                       <FileDown />
                       <span>Esempio YAML</span>
                     </a>
@@ -135,7 +137,7 @@ export function ControlPanel({
                     asChild
                     tooltip="Scarica CSS di esempio"
                   >
-                     <a href="/example-style.css" download="example-style.css">
+                     <a href={`${basePath}/example-style.css`} download="example-style.css">
                       <FileDown />
                       <span>Esempio CSS</span>
                     </a>

@@ -1,8 +1,13 @@
 /** @type {import('next').NextConfig} */
+const repoName = '/yaml-csv-2resume_fbs';
+
 const nextConfig = {
   output: 'export',
-  basePath: '/yaml-csv-2resume_fbs',
-  assetPrefix: '/yaml-csv-2resume_fbs/',
+  basePath: repoName,
+  assetPrefix: `${repoName}/`,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: repoName,
+  },
 };
 
 export default nextConfig;
