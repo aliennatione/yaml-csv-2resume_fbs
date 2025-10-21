@@ -4,7 +4,7 @@ const profilePic = PlaceHolderImages.find(p => p.id === 'profile-picture');
 
 export interface PersonalInfo {
   name: string;
-  title: string;
+  title?: string;
   email: string;
   phone: string;
   location: string;
@@ -19,9 +19,9 @@ export interface Experience {
   id: string;
   title: string;
   company: string;
-  location: string;
-  startDate: string;
-  endDate: string;
+  location?: string;
+  startDate?: string;
+  endDate?: string;
   description: string[];
 }
 
@@ -29,9 +29,9 @@ export interface Education {
   id: string;
   institution: string;
   degree: string;
-  field: string;
-  startDate: string;
-  endDate: string;
+  field?: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 export interface Skill {

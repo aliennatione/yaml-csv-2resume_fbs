@@ -59,7 +59,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
             <h1 className="text-4xl sm:text-5xl font-bold font-headline text-primary">
               {personalInfo.name}
             </h1>
-            <p className="text-xl text-accent mt-1">{personalInfo.title}</p>
+            {personalInfo.title && <p className="text-xl text-accent mt-1">{personalInfo.title}</p>}
           </div>
         </header>
 
@@ -90,8 +90,8 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                   <p className="font-medium text-foreground/80">{exp.company}</p>
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
-                  <p>{exp.startDate} - {exp.endDate}</p>
-                  <p>{exp.location}</p>
+                  {(exp.startDate || exp.endDate) && <p>{exp.startDate}{exp.startDate && exp.endDate && ' - '}{exp.endDate}</p>}
+                  {exp.location && <p>{exp.location}</p>}
                 </div>
               </div>
               <ul className="list-disc pl-5 mt-2 space-y-2 text-foreground/90">
@@ -111,10 +111,10 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                <div>
                   <h3 className="text-lg font-semibold">{edu.degree}</h3>
                   <p className="font-medium text-foreground/80">{edu.institution}</p>
-                  <p className="text-sm text-muted-foreground">{edu.field}</p>
+                  {edu.field && <p className="text-sm text-muted-foreground">{edu.field}</p>}
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
-                  <p>{edu.startDate} - {edu.endDate}</p>
+                  {(edu.startDate || edu.endDate) && <p>{edu.startDate}{edu.startDate && edu.endDate && ' - '}{edu.endDate}</p>}
                 </div>
             </div>
           ))}
@@ -139,7 +139,7 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
                         ))}
                     </div>
                 </div>
-            ))}
+            )) Trivet snippet
         </Section>
       </CardContent>
     </Card>

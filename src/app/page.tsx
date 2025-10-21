@@ -14,6 +14,47 @@ import { defaultResumeData } from "@/lib/resume-data";
 import { useToast } from "@/hooks/use-toast";
 import yaml from "js-yaml";
 
+// Funzione per mappare il nuovo formato YAML alla struttura ResumeData
+const mapNewYamlToResumeData = (data: any): ResumeData => {
+  return {
+    personalInfo: {
+      name: `${data.informazioni_personali.nome} ${data.informazioni_personali.cognome}`,
+      title: data.profilo_professionale[0], // Usa il primo elemento come titolo
+      email: data.informazioni_personali.email,
+      phone: data.informazioni_personali.telefono,
+      location: data.informazioni_personali.indirizzo,
+      linkedin: "", // Campo non presente nel nuovo formato
+      github: "", // Campo non presente nel nuovo formato
+      website: "", // Campo non presente nel nuovo formato
+      profilePictureUrl: "", // Campo non presente nel nuovo formato
+      profilePictureHint: "professional portrait",
+    },
+    summary: data.profilo_professionale.join(" "),
+    experience: data.esperienza_professionale.map((exp: any, index: number) => ({
+      id: `exp${index + 1}`,
+      title: exp.titolo,
+      company: exp.datore_lavoro,
+      location: "", // Campo non presente nel nuovo formato
+      startDate: exp.periodo.split(" - ")[0],
+      endDate: exp.periodo.split(" - ")[1],
+      description: exp.descrizione,
+    })),
+    education: data.istruzione_e_formazione.map((edu: any, index: number) => ({
+      id: `edu${index + 1}`,
+      institution: edu.istituzione,
+      degree: edu.titolo,
+      field: edu.descrizione, // Usa la descrizione come campo di studio
+      startDate: edu.anno ? edu.anno.toString() : "",
+      endDate: "",
+    })),
+    skills: [
+      ...data.competenze.soft_skills.map((skill: any, index: number) => ({ id: `skill-soft-${index + 1}`, name: skill.nome, level: skill.livello })),
+      ...data.competenze.competenze_digitali.map((skill: any, index: number) => ({ id: `skill-digital-${index + 1}`, name: skill.nome, level: skill.livello })),
+    ],
+    projects: [], // Sezione non presente nel nuovo formato
+  };
+};
+
 export default function ResumeArchitectPage() {
   const [resumeData, setResumeData] = React.useState<ResumeData>(defaultResumeData);
   const [customCss, setCustomCss] = React.useState<string>("");
@@ -23,10 +64,19 @@ export default function ResumeArchitectPage() {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const data = yaml.load(e.target?.result as string) as ResumeData;
-        // Basic validation
-        if (data && data.personalInfo && data.experience) {
-          setResumeData(data);
+        const data = yaml.load(e.target?.result as string) as any;
+        let mappedData: ResumeData;
+
+        // Rilevamento del formato e mappatura
+        if (data.informazioni_personali) {
+          mappedData = mapNewYamlToResumeData(data);
+        } else {
+          mappedData = data as ResumeData;
+        }
+
+        // Validazione di base
+        if (mappedData && mappedData.personalInfo && mappedData.experience) {
+          setResumeData(mappedData);
           toast({
             title: "Success",
             description: "Resume data loaded successfully.",
@@ -69,7 +119,6 @@ export default function ResumeArchitectPage() {
     const { default: jsPDF } = await import("jspdf");
     const { default: html2canvas } = await import("html2canvas");
 
-    // A4 dimensions in points: 595.28 x 841.89
     const a4Width = 595.28;
     const a4Height = 841.89;
 
