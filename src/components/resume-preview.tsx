@@ -44,23 +44,17 @@ const Section: React.FC<{
 export function ResumePreview({ data, setData }: ResumePreviewProps) {
   const { personalInfo, summary, experience, education, skills, projects } = data;
 
-  const handleSave = (field: keyof ResumeData | `personalInfo.${keyof ResumeData['personalInfo']}`, value: any) => {
+  const handleSave = (field: keyof ResumeData | `personalInfo.${keyof ResumeData['personalInfo']}` | `experience.${number}.${keyof ResumeData['experience'][0]}` | `experience.${number}.description.${number}`, value: any) => {
     const keys = field.split('.');
-    if (keys.length > 1) {
-        const [mainKey, subKey] = keys;
-        setData(prevData => ({
-            ...prevData,
-            [mainKey]: {
-                ...(prevData as any)[mainKey],
-                [subKey]: value
-            }
-        }));
-    } else {
-        setData(prevData => ({
-            ...prevData,
-            [field]: value,
-        }));
-    }
+    setData(prevData => {
+        const newData = JSON.parse(JSON.stringify(prevData));
+        let current = newData;
+        for (let i = 0; i < keys.length - 1; i++) {
+            current = current[keys[i]];
+        }
+        current[keys[keys.length - 1]] = value;
+        return newData;
+    });
   };
 
   return (
@@ -145,18 +139,23 @@ export function ResumePreview({ data, setData }: ResumePreviewProps) {
             <div key={exp.id} className="mb-6">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-semibold">{exp.title}</h3>
-                  <p className="font-medium text-foreground/80">{exp.company}</p>
+                  <EditableField as="h3" value={exp.title} onSave={(value) => handleSave(`experience.${expIndex}.title`, value)} className="text-lg font-semibold" />
+                  <EditableField as="p" value={exp.company} onSave={(value) => handleSave(`experience.${expIndex}.company`, value)} className="font-medium text-foreground/80" />
                 </div>
                 <div className="text-right text-sm text-muted-foreground whitespace-nowrap">
-                  {(exp.startDate || exp.endDate) && <p>{exp.startDate}{exp.startDate && exp.endDate && ' - '}{exp.endDate}</p>}
-                  {exp.location && <p>{exp.location}</p>}
+                  {(exp.startDate || exp.endDate) && 
+                    <p>
+                        <EditableField as="span" value={exp.startDate} onSave={(value) => handleSave(`experience.${expIndex}.startDate`, value)} />
+                        {exp.startDate && exp.endDate && ' - '}
+                        <EditableField as="span" value={exp.endDate} onSave={(value) => handleSave(`experience.${expIndex}.endDate`, value)} />
+                    </p>}
+                  {exp.location && <EditableField as="p" value={exp.location} onSave={(value) => handleSave(`experience.${expIndex}.location`, value)} />}
                 </div>
               </div>
               <ul className="list-disc pl-5 mt-2 space-y-2 text-foreground/90">
                 {exp.description.map((desc, descIndex) => (
                   <li key={descIndex} className="relative group/item">
-                    {desc}
+                    <EditableField as="textarea" value={desc} onSave={(value) => handleSave(`experience.${expIndex}.description.${descIndex}`, value)} className="w-full" />
                   </li>
                 ))}
               </ul>
