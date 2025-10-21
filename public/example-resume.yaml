@@ -1,0 +1,82 @@
+personalInfo:
+  name: "Maria Rossi"
+  title: "Sviluppatore Web Full-Stack"
+  email: "maria.rossi@email.com"
+  phone: "+39 333 123 4567"
+  location: "Milano, Italia"
+  linkedin: "linkedin.com/in/mariarossi"
+  github: "github.com/mariarossi"
+  website: "mariarossi.dev"
+  profilePictureUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc2MDk1MTU0NHww&ixlib=rb-4.1.0&q=80&w=1080"
+  profilePictureHint: "professional woman portrait"
+
+summary: "Sviluppatore web full-stack con 5 anni di esperienza nella creazione di applicazioni web moderne e performanti. Esperta in JavaScript, React e Node.js, con una forte passione per la user experience e il design pulito. Abile nel tradurre le esigenze di business in soluzioni tecniche efficaci."
+
+experience:
+  - id: "exp1"
+    title: "Sviluppatore Web Senior"
+    company: "FutureTech SRL"
+    location: "Milano, Italia"
+    startDate: "Mar 2021"
+    endDate: "Presente"
+    description:
+      - "Ho guidato lo sviluppo del nuovo portale clienti, utilizzando Next.js e Tailwind CSS, migliorando i tempi di caricamento del 50%."
+      - "Ho progettato e implementato API RESTful per servizi di terze parti, gestendo l'autenticazione e la sicurezza dei dati."
+      - "Ho fatto da mentore a due sviluppatori junior, aiutandoli a crescere professionalmente attraverso code review e pair programming."
+
+  - id: "exp2"
+    title: "Sviluppatore Frontend"
+    company: "Web Agency Creativa"
+    location: "Roma, Italia"
+    startDate: "Giu 2019"
+    endDate: "Feb 2021"
+    description:
+      - "Ho sviluppato interfacce utente interattive e responsive per clienti di vari settori utilizzando React e Redux."
+      - "Ho collaborato con i designer per garantire la fedeltà dei mockup e una UX ottimale."
+      - "Ho ottimizzato le performance del sito, riducendo le dimensioni del bundle e migliorando il punteggio di Google PageSpeed."
+
+education:
+  - id: "edu1"
+    institution: "Politecnico di Milano"
+    degree: "Laurea Magistrale"
+    field: "Ingegneria Informatica"
+    startDate: "2017"
+    endDate: "2019"
+  - id: "edu2"
+    institution: "Università degli Studi di Roma La Sapienza"
+    degree: "Laurea Triennale"
+    field: "Informatica"
+    startDate: "2014"
+    endDate: "2017"
+
+skills:
+  - id: "skill1"
+    name: "JavaScript/TypeScript"
+    level: "Expert"
+  - id: "skill2"
+    name: "React / Next.js"
+    level: "Expert"
+  - id: "skill3"
+    name: "Node.js / Express"
+    level: "Advanced"
+  - id: "skill4"
+    name: "HTML5 & CSS3"
+    level: "Expert"
+  - id: "skill5"
+    name: "Database (PostgreSQL, MongoDB)"
+    level: "Advanced"
+  - id: "skill6"
+    name: "Git & GitHub"
+    level: "Expert"
+
+projects:
+  - id: "proj1"
+    name: "Piattaforma E-commerce"
+    description: "Un'applicazione e-commerce completa costruita con MERN stack, che include carrello, pagamenti e un pannello di amministrazione."
+    url: "github.com/mariarossi/ecommerce-project"
+    technologies: ["React", "Node.js", "Express", "MongoDB"]
+  - id: "proj2"
+    name: "Blog Personale"
+    description: "Un blog responsive realizzato con Gatsby.js per la generazione di siti statici e Netlify CMS per la gestione dei contenuti."
+    url: "mariarossi.dev/blog"
+    technologies: ["Gatsby.js", "GraphQL", "Netlify CMS"]

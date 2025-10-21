@@ -37,8 +37,8 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const handleSave = () => {
     localStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
     toast({
-      title: "Settings Saved",
-      description: "Your API key has been updated.",
+      title: "Impostazioni salvate",
+      description: "La tua chiave API è stata aggiornata.",
     });
     onOpenChange(false);
   };
@@ -47,15 +47,15 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
+          <DialogTitle>Impostazioni</DialogTitle>
           <DialogDescription>
-            Manage application settings here. Changes are saved locally in your browser.
+            Gestisci le impostazioni dell'applicazione qui. Le modifiche vengono salvate localmente nel tuo browser.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="api-key" className="text-right col-span-1">
-              API Key
+              Chiave API
             </Label>
             <Input
               id="api-key"
@@ -63,15 +63,15 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               className="col-span-3"
-              placeholder="Paste your Google AI API key"
+              placeholder="Incolla la tua chiave API di Google AI"
             />
           </div>
           <p className="text-xs text-muted-foreground col-span-4 px-1">
-            Override the default API key for GenAI features. This is optional.
+            Sovrascrivi la chiave API predefinita per le funzionalità GenAI. Questo è opzionale.
           </p>
         </div>
         <DialogFooter>
-          <Button type="button" onClick={handleSave}>Save changes</Button>
+          <Button type="button" onClick={handleSave}>Salva modifiche</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

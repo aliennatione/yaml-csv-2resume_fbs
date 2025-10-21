@@ -1,0 +1,54 @@
+/*
+  File CSS di esempio per Resume Architect.
+  Usa questo file come punto di partenza per personalizzare il tuo curriculum.
+  Le regole CSS qui definite sovrascriveranno gli stili predefiniti.
+
+  Suggerimento: Tutti gli stili del curriculum sono contenuti nell'elemento #resume-container.
+  Usa questo selettore per rendere le tue regole più specifiche e mirate.
+*/
+
+/* Esempio: Cambia il colore primario del tema */
+:root {
+  --primary: 262 84% 50%; /* Viola acceso */
+  --accent: 330 84% 50%; /* Rosa acceso */
+  --primary-foreground: 0 0% 100%; /* Testo bianco per i colori primari */
+  --accent-foreground: 0 0% 100%; /* Testo bianco per i colori accentati */
+}
+
+
+/* Esempio: Cambia il font del corpo del testo e dei titoli */
+#resume-container {
+  font-family: 'Georgia', serif;
+}
+
+#resume-container h1, 
+#resume-container h2, 
+#resume-container h3 {
+  font-family: 'Helvetica', sans-serif;
+}
+
+/* Esempio: Aggiunge un bordo inferiore decorativo ai titoli delle sezioni */
+#resume-container h2.text-primary {
+  border-bottom: 2px solid hsl(var(--accent));
+  padding-bottom: 8px;
+}
+
+/* Esempio: Stile dei link nel curriculum */
+#resume-container a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#resume-container a:hover {
+  text-decoration: underline;
+}
+
+/* Esempio: Modifica lo stile dei badge delle competenze */
+#resume-container .font-medium.bg-accent\/10 {
+  background-color: hsla(var(--primary), 0.15) !important;
+  color: hsl(var(--primary)) !important;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+}
